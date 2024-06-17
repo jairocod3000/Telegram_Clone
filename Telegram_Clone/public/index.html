@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Telegram Clone</title>
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Formulario de inicio de sesión -->
+    <div id="loginForm">
+        <h1>Iniciar Sesión</h1>
+        <form onsubmit="login(event)">
+            <input type="text" id="name" placeholder="Nombre" required>
+            <input type="text" id="status" placeholder="Estado" required>
+            <label>Escoge tu avatar:</label>
+            <div class="avatar-selection">
+                <!-- Para seleccionar un avatar -->
+                <input type="radio" id="avatar1" name="avatar" value="/img/avatar1.png">
+                <label for="avatar1"><img src="img/avatar1.png" alt="Avatar 1"></label>
+                <input type="radio" id="avatar2" name="avatar" value="/img/avatar2.png">
+                <label for="avatar2"><img src="img/avatar2.png" alt="Avatar 2"></label>
+                <input type="radio" id="avatar3" name="avatar" value="/img/avatar3.png">
+                <label for="avatar3"><img src="img/avatar3.png" alt="Avatar 3"></label>
+                <input type="radio" id="avatar4" name="avatar" value="/img/avatar4.png">
+                <label for="avatar4"><img src="img/avatar4.png" alt="Avatar 4"></label>
+                <!-- O para seleccionar cualquier otro avatar que tengas en el ordenador -->
+                <input type="file" id="avatarUpload" accept="image/*">
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+    <!-- Área principal después del inicio de sesión, oculta inicialmente -->
+    <div id="mainPage" style="display: none;">
+        <h1 id="welcome"></h1>
+        <div style="display: flex;">
+            <!-- Lista de usuarios conectados -->
+            <div id="userList" style="width: 200px;">
+                <h2>Usuarios Conectados:</h2>
+                <ul></ul>
+            </div>
+            <!-- Área de chat principal -->
+            <div id="chatArea" style="flex-grow: 1;">
+                <div id="messages" style="height: 300px; overflow: auto;"></div>
+                <input type="text" id="chatMessage" placeholder="Escribe un mensaje...">
+                <input type="file" id="fileInput" accept="image/*,application/pdf"> 
+                <button onclick="sendMessage()">Enviar Texto</button>
+                <button onclick="sendFile()">Enviar Archivo</button>
+                <p id="typing" style="color: red;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para el chat privado, oculto inicialmente -->
+    <div id="privateChatModal" style="display: none;">
+        <h2 id="privateChatHeader">Chat Privado con</h2>
+        <div id="privateMessages" style="height: 300px; overflow: auto;"></div>
+        <input type="text" id="privateMessageInput" placeholder="Escribe un mensaje privado...">
+        <button id="sendPrivateMessage">Enviar</button>
+        <button id="closePrivateChat">Cerrar</button>
+    </div>
+
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
